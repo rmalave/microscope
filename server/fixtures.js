@@ -12,7 +12,7 @@ if (Posts.find().count() === 0) {
     profile: {
       name: 'Scha Greif'
     }
-  })
+  });
   var sacha = Meteor.users.findOne(sachaId);
 
   var telescopeId = Posts.insert({
@@ -21,8 +21,10 @@ if (Posts.find().count() === 0) {
     author: sacha.profile.name,
     url: 'http://sachagreif.com/introducing-telescope/',
     submitted: new Date(now - 7 * 3600 * 1000),
-    commentsCount: 2
-  })
+    commentsCount: 2,
+    upvoters: [],
+    votes: 0
+  });
 
   Comments.insert({
     postId: telescopeId,
@@ -30,7 +32,7 @@ if (Posts.find().count() === 0) {
     author: tom.profile.name,
     submitted: new Date(now - 5 * 3600 * 1000),
     body: 'Introducing project Sacha, can I get involved?'
-  })
+  });
 
   Comments.insert({
     postId: telescopeId,
@@ -38,12 +40,18 @@ if (Posts.find().count() === 0) {
     author: sacha.profile.name,
     submitted: new Date(now - 3 * 36000 * 1000),
     body: 'You sure can Tom!'
-  })
+  });
 
   Posts.insert({
     title: 'Introducing Telescope',
-    url: 'http://sachagreif.com/introducing-telescope/'
-  })
+    userId: sacha._id,
+    author: sacha.profile.name,
+    url: 'http://sachagreif.com/introducing-telescope/',
+    submitted: new Date(now - 7 * 3600 * 1000),
+    commentsCount: 2,
+    upvoters: [],
+    votes: 0
+  });
 
   Posts.insert({
     title: 'Meteor',
@@ -51,8 +59,10 @@ if (Posts.find().count() === 0) {
     author: tom.profile.name,
     userId: tom._id,
     submitted: new Date(now - 10 * 36000 * 1000),
-    commentsCount: 0
-  })
+    commentsCount: 0,
+    upvoters: [],
+    votes: 0
+  });
 
   Posts.insert({
     title: 'The Meteor Book',
@@ -60,8 +70,10 @@ if (Posts.find().count() === 0) {
     userId: tom._id,
     author: tom.profile.name,
     submitted: new Date(now - 12 * 36000 * 1000),
-    commentsCount: 0
-  })
+    commentsCount: 0,
+    upvoters: [],
+    votes: 0
+  });
 
   for (var i = 0; i < 10; i++) {
     Posts.insert({
@@ -70,7 +82,9 @@ if (Posts.find().count() === 0) {
       userId: sacha._id,
       url: 'http://google.com/?q=test-' + i,
       submitted: new Date(now - i * 3600 * 1000),
-      commentsCount: 0
-    })
+      commentsCount: 0,
+      upvoters: [],
+      votes: 0
+    });
   }
 }
